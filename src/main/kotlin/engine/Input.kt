@@ -15,10 +15,10 @@ class Input: KeyListener , MouseListener, MouseMotionListener, MouseWheelListene
     private var buttons :BooleanArray = BooleanArray(NUM_BUTTONS)
     private var buttonsLast :BooleanArray = BooleanArray(NUM_BUTTONS)
 
-    private var mouseX: Int = 0
-    private var mouseY: Int = 0
+    var mouseX: Int = 0
+    var mouseY: Int = 0
 
-    private var scroll: Int = 0
+    var scroll: Int = 0
 
 
     fun Input(gc: GameContainer){
@@ -35,6 +35,9 @@ class Input: KeyListener , MouseListener, MouseMotionListener, MouseWheelListene
     }
 
     fun update(){
+
+        scroll =0
+
         for (i in 0 until NUM_KEYS){
             keysLast[i] = keys[i]
         }
@@ -43,6 +46,32 @@ class Input: KeyListener , MouseListener, MouseMotionListener, MouseWheelListene
             buttonsLast[i] = buttons[i]
         }
     }
+
+    fun isKey(keyCode: Int):Boolean {
+        return keys[keyCode]
+    }
+
+    fun isKeyUp(keyCode: Int):Boolean {
+        return !keys[keyCode] && keysLast[keyCode]
+    }
+
+    fun isKeyDown(keyCode: Int):Boolean {
+        return keys[keyCode] && !keysLast[keyCode]
+    }
+
+
+    fun isButton(button: Int):Boolean {
+        return buttons[button]
+    }
+
+    fun isButtonUp(button: Int):Boolean {
+        return !buttons[button] && buttonsLast[button]
+    }
+
+    fun isButtonDown(button: Int):Boolean {
+        return buttons[button] && !buttonsLast[button]
+    }
+
 
     override fun keyTyped(e: KeyEvent?) {
 
@@ -86,8 +115,8 @@ class Input: KeyListener , MouseListener, MouseMotionListener, MouseWheelListene
         mouseY = (e.y / gc.scale).toInt()
     }
 
-    override fun mouseWheelMoved(e: MouseWheelEvent?) {
-//TODO: HERE 11:56
+    override fun mouseWheelMoved(e: MouseWheelEvent) {
+        scroll = e.wheelRotation
     }
 
 }

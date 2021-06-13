@@ -1,6 +1,8 @@
 package engine
 
 import java.awt.SystemColor.window
+import java.awt.event.KeyEvent
+import java.awt.event.MouseEvent
 import java.lang.Runnable
 import java.lang.InterruptedException
 import kotlin.jvm.JvmStatic
@@ -9,6 +11,7 @@ class GameContainer : Runnable {
     private var thread: Thread? = null
     lateinit var window: Window
     lateinit var renderer: Renderer
+    lateinit var input: Input
 
 
     private var running = false
@@ -26,6 +29,9 @@ class GameContainer : Runnable {
 
         renderer = Renderer()
         renderer.Renderer(this)
+
+        input = Input()
+        input.Input(this)
 
         thread = Thread(this)
         thread!!.run()
@@ -66,6 +72,15 @@ class GameContainer : Runnable {
 
 
                 //TODO: Update Game
+
+
+
+                input.update()
+
+
+
+
+
                 if (frametime >= 1.0){
                     frametime = 0.0
                     fps = frames
