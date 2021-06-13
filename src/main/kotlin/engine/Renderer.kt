@@ -1,3 +1,5 @@
+package engine
+
 import java.awt.image.DataBufferInt
 
 class Renderer {
@@ -17,7 +19,7 @@ class Renderer {
 
     fun clear(){
         for (i in p!!.indices){
-            p!![i] += i
+            p!![i] =0
         }
     }
 
