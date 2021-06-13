@@ -1,4 +1,4 @@
-
+import java.awt.image.DataBufferInt
 
 class Renderer {
 
@@ -10,9 +10,16 @@ class Renderer {
 
         pW = gc.width
         pH = gc.height
+        p = (gc.window.image!!.raster.dataBuffer as DataBufferInt).data
+
 
     }
 
+    fun clear(){
+        for (i in p!!.indices){
+            p!![i] += i
+        }
+    }
 
 
 }

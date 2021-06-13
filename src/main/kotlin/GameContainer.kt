@@ -5,7 +5,8 @@ import kotlin.jvm.JvmStatic
 
 class GameContainer : Runnable {
     private var thread: Thread? = null
-    private lateinit var window: Window
+    lateinit var window: Window
+    lateinit var renderer: Renderer
 
 
     private var running = false
@@ -20,6 +21,9 @@ class GameContainer : Runnable {
     fun start() {
         window = Window()
         window.Window(this)
+
+        renderer = Renderer()
+        renderer.Renderer(this)
 
         thread = Thread(this)
         thread!!.run()
@@ -70,6 +74,9 @@ class GameContainer : Runnable {
             }
             if (render) {
                 //TODO: Render Game
+                    renderer.clear()
+
+
 
                     window.update()
                     frames++
