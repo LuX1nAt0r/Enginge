@@ -100,7 +100,3 @@ class GameContainer : Runnable {
 
 }
 
-public fun main(){
-    val gc = GameContainer()
-    gc.start()
-}

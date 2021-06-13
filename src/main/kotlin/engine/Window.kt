@@ -10,9 +10,9 @@ import javax.swing.JFrame
 
 class Window() {
 
-    private lateinit var frame :JFrame
+    lateinit var frame :JFrame
     var image : BufferedImage? = null
-    private lateinit var canvas: Canvas
+    lateinit var canvas: Canvas
     private var bs: BufferStrategy? =null
     private var g: Graphics? =null
 
