@@ -12,6 +12,7 @@ class GameContainer : Runnable {
     lateinit var window: Window
     lateinit var renderer: Renderer
     lateinit var input: Input
+    lateinit var game: AbstractGame
 
 
     private var running = false
@@ -21,6 +22,10 @@ class GameContainer : Runnable {
     var height = 240
     var scale : Float = 3f
     var title = "LukasEngine v1.0"
+
+    fun GameContainer(game: AbstractGame){
+        this.game = game
+    }
 
 
     fun start() {
@@ -32,6 +37,7 @@ class GameContainer : Runnable {
 
         input = Input()
         input.Input(this)
+
 
         thread = Thread(this)
         thread!!.run()
@@ -71,7 +77,8 @@ class GameContainer : Runnable {
 
 
 
-                //TODO: Update Game
+
+                game.update(this, UPDATE_CAP.toFloat())
 
 
 
@@ -90,10 +97,11 @@ class GameContainer : Runnable {
 
             }
             if (render) {
-                //TODO: Render Game
+
+
                     renderer.clear()
 
-
+                    game.render(this, renderer)
 
                     window.update()
                     frames++
