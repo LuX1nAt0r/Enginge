@@ -12,16 +12,8 @@ class GameManager: AbstractGame() {
     private var image: Image = Image()
 
     init {
-        image.Image("resources/test.png")
+        image.Image("/test.png")
     }
-
-
-    /*fun GameManager(){
-        image = Image()
-        image.Image("resources/test.png")
-    }*/
-
-
 
     override fun update(gc: GameContainer, dt: Float) {
 
@@ -33,6 +25,7 @@ class GameManager: AbstractGame() {
 
     override fun render(gc: GameContainer, r: Renderer) {
 
+        r.drawImage(image, gc.input.mouseX, gc.input.mouseY)
     }
 
 
