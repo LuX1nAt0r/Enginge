@@ -34,8 +34,34 @@ class Renderer {
 
 
     fun drawImage(image: Image, offX: Int, offY: Int){
-        for (y in 0 until image.height){
-            for (x in 0 until image.width){
+
+        var newX = 0
+        var newY = 0
+        var newWidth = image.width
+        var newHeight = image.height
+
+//Don't Render code
+        if(offX < -newWidth) return
+        if(offY < -newHeight) return
+        if (offX >= pW) return
+        if (offY >= pH) return
+
+//Clipping code
+        if(offX < 0){
+            newX -= offX }
+        if (offY < 0){
+            newY -= offY }
+        if(newWidth + offX >= pW){
+            newWidth -= (newWidth + offX - pW) }
+        if(newHeight + offY >= pH){
+            newHeight -= (newHeight + offY - pH) }
+
+
+
+
+
+        for (y in newY until newHeight){
+            for (x in newX until newWidth){
                 setPixel(x + offX, y + offY, image.p[x + y * image.width])
             }
         }
