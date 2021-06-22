@@ -6,7 +6,10 @@ import java.io.IOException
 import java.io.InputStreamReader
 import javax.imageio.ImageIO
 
-class Image() {
+open class Image() {
+    constructor(path: String) : this() {
+
+    }
 
     var width: Int = 0
     var height: Int = 0
