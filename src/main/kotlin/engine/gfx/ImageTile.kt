@@ -1,4 +1,3 @@
 package engine.gfx
 
-class ImageTile {
-}
+class ImageTile(path: String, var tileW: Int, var tileH: Int) : Image(path)

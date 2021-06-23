@@ -8,6 +8,7 @@ import javax.imageio.ImageIO
 
 open class Image() {
     constructor(path: String) : this() {
+        Image(path)
 
     }
 

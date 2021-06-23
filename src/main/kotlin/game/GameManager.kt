@@ -5,27 +5,38 @@ import engine.GameContainer
 import engine.Input
 import engine.Renderer
 import engine.gfx.Image
+import engine.gfx.ImageTile
 import java.awt.event.KeyEvent
 
 class GameManager: AbstractGame() {
 
-    private var image: Image = Image()
+    private var image: ImageTile = ImageTile("/test.png", 16, 16)
 
-    init {
-        image.Image("/test.png")
-    }
+    /*init {
+        image.
+    }*/
 
     override fun update(gc: GameContainer, dt: Float) {
 
         if (gc.input.isKeyDown(KeyEvent.VK_A)){
             println("A was pressed")
         }
+        temp += dt
+
+        if(temp >3){
+            temp = 0f
+        }
 
     }
 
+    var temp: Float = 0F
+
+
+
+
     override fun render(gc: GameContainer, r: Renderer) {
 
-        r.drawImage(image, gc.input.mouseX, gc.input.mouseY)
+        r.drawImageTile(image, gc.input.mouseX - 8, gc.input.mouseY -16, temp.toInt(),0)
     }
 
 

@@ -1,7 +1,7 @@
 package engine
 
 import engine.gfx.Image
-import engine.gfx.ImageTileJav
+import engine.gfx.ImageTile
 import java.awt.image.DataBufferInt
 
 class Renderer {
@@ -68,7 +68,7 @@ class Renderer {
         }
     }
 
-    fun drawImageTile(image:ImageTileJav, offX: Int, offY: Int, tileX: Int, tileY: Int){
+    fun drawImageTile(image:ImageTile, offX: Int, offY: Int, tileX: Int, tileY: Int){
 
 //Don't Render code
         if(offX < -image.tileW) return
