@@ -6,18 +6,15 @@ import java.io.IOException
 import java.io.InputStreamReader
 import javax.imageio.ImageIO
 
-open class Image() {
-    constructor(path: String) : this() {
-        Image(path)
+open class Image(path: String) {
 
-    }
 
     var width: Int = 0
     var height: Int = 0
     lateinit var p: IntArray
     lateinit var image: BufferedImage
 
-    public fun Image(path: String){
+    init{
         try {
             image = ImageIO.read(Image::class.java.getResourceAsStream(path))
 

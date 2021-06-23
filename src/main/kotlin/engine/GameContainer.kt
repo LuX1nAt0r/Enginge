@@ -57,7 +57,7 @@ class GameContainer : Runnable {
 
         var frametime:Double = 0.0
         var frames = 0
-        var fps: Int
+        var fps: Int = 0
 
 
         while (running) {
@@ -92,7 +92,6 @@ class GameContainer : Runnable {
                     frametime = 0.0
                     fps = frames
                     frames = 0
-                    println("FPS: $fps")
                 }
 
             }
@@ -102,6 +101,7 @@ class GameContainer : Runnable {
                     renderer.clear()
 
                     game.render(this, renderer)
+                    renderer.drawText("FPS:$fps", 0,0,(0xff00ffff).toInt())
 
                     window.update()
                     frames++

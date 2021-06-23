@@ -21,7 +21,7 @@ class GameManager: AbstractGame() {
         if (gc.input.isKeyDown(KeyEvent.VK_A)){
             println("A was pressed")
         }
-        temp += dt
+        temp += dt * 5
 
         if(temp >3){
             temp = 0f

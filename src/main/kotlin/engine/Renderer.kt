@@ -1,5 +1,6 @@
 package engine
 
+import engine.gfx.Font
 import engine.gfx.Image
 import engine.gfx.ImageTile
 import java.awt.image.DataBufferInt
@@ -10,7 +11,15 @@ class Renderer {
     private var pH: Int = 0
     private lateinit var p: IntArray
 
-    public fun Renderer(gc: GameContainer){
+   private var font = Font.STANDARD
+
+    //private var font: Font = Font("/fonts/standard.png")
+
+
+
+
+
+    fun Renderer(gc: GameContainer){
 
         pW = gc.width
         pH = gc.height
@@ -32,6 +41,32 @@ class Renderer {
 
         p[x + y * pW] = value
     }
+
+    fun drawText(text: String, offX: Int, offY: Int, color:Int){
+
+        text.toUpperCase()
+        var offset = 0
+
+        for (i in text.indices){
+            var unicode: Int = text.codePointAt(i) -32
+
+
+            for (y in 0 until font.fontImage.height){
+                for (x in 0 until font.widths[unicode]){
+
+                    if (font.fontImage.p[(x + font.offsets[unicode]) + y * font.fontImage.width] == (0xffffffff).toInt()){
+                        setPixel(x + offX,y + offY,color)
+                    }
+                }
+            }
+
+            offset += font.widths[unicode]
+
+        }
+
+    }
+
+
 
 
     fun drawImage(image: Image, offX: Int, offY: Int){
