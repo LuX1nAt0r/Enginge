@@ -7,7 +7,7 @@ class Font(path: String) {
     var widths: IntArray = IntArray(59)
 
     companion object {
-        val STANDARD = Font("standard.png")
+        var STANDARD = Font("/standard.png")
     }
 
     init {
