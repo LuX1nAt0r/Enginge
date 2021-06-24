@@ -11,13 +11,7 @@ class Renderer {
     private var pW: Int = 0
     private var pH: Int = 0
     private lateinit var p: IntArray
-
-   private var font = Font.STANDARD
-
-    //private var font: Font = Font("/fonts/standard.png")
-
-
-
+    private var font = Font.STANDARD
 
 
     fun Renderer(gc: GameContainer){
@@ -44,15 +38,11 @@ class Renderer {
     }
 
     fun drawText(text: String, offX: Int, offY: Int, color:Int){
-
         text.toUpperCase()
         var offset = 0
 
         for (i in text.indices){
             val unicode: Int = text.codePointAt(i) -32
-
-
-
 
             for (y in 0 until font.fontImage.height){
                 for (x in 0 until font.widths[unicode]){
