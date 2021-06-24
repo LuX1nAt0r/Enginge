@@ -101,7 +101,7 @@ class GameContainer : Runnable {
                     renderer.clear()
 
                     game.render(this, renderer)
-                    renderer.drawText("FPS:$fps", 0,0,(0xff00ffff).toInt())
+                    renderer.drawText("FPS: $fps", 0,0,(0xff00ffff).toInt())
 
                     window.update()
                     frames++

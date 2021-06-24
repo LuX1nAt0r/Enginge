@@ -3,6 +3,7 @@ package engine
 import engine.gfx.Font
 import engine.gfx.Image
 import engine.gfx.ImageTile
+
 import java.awt.image.DataBufferInt
 
 class Renderer {
@@ -48,14 +49,16 @@ class Renderer {
         var offset = 0
 
         for (i in text.indices){
-            var unicode: Int = text.codePointAt(i) -32
+            val unicode: Int = text.codePointAt(i) -32
+
+
 
 
             for (y in 0 until font.fontImage.height){
                 for (x in 0 until font.widths[unicode]){
 
                     if (font.fontImage.p[(x + font.offsets[unicode]) + y * font.fontImage.width] == (0xffffffff).toInt()){
-                        setPixel(x + offX,y + offY,color)
+                        setPixel(x + offX + offset,y + offY,color)
                     }
                 }
             }
