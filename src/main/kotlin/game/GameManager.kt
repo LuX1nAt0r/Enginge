@@ -4,6 +4,7 @@ import engine.AbstractGame
 import engine.GameContainer
 import engine.Input
 import engine.Renderer
+import engine.audio.SoundClip
 import engine.gfx.Image
 import engine.gfx.ImageTile
 import java.awt.event.KeyEvent
@@ -11,15 +12,17 @@ import java.awt.event.KeyEvent
 class GameManager: AbstractGame() {
 
     private var image: ImageTile = ImageTile("/test.png", 16, 16)
+    private var clip: SoundClip = SoundClip("/sounds/sound.wav")
 
-    /*init {
-        image.
-    }*/
+
+    init {
+        clip.setVolume(-20f)
+    }
 
     override fun update(gc: GameContainer, dt: Float) {
 
         if (gc.input.isKeyDown(KeyEvent.VK_A)){
-            println("A was pressed")
+            clip.play()
         }
         temp += dt * 5
 

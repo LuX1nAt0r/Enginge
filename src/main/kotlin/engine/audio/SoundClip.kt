@@ -77,6 +77,7 @@ class SoundClip(path: String) {
     fun setVolume(value: Float){
         gainControl.value = value
 
+
     }
 
     fun isRunning(): Boolean {
