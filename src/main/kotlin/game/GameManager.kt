@@ -39,7 +39,8 @@ class GameManager: AbstractGame() {
 
     override fun render(gc: GameContainer, r: Renderer) {
 
-        r.drawImageTile(image, gc.input.mouseX - 8, gc.input.mouseY -16, temp.toInt(),0)
+       // r.drawImageTile(image, gc.input.mouseX - 8, gc.input.mouseY -16, temp.toInt(),0)
+        r.drawFilledRect(10, 10, 32, 32, (0xffffccff).toInt())
     }
 
 
