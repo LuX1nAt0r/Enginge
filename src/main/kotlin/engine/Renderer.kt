@@ -26,8 +26,8 @@ class Renderer(gc: GameContainer) {
         }
     }
 
-    fun setPixel(x: Int, y: Int, value: Int){
-        if((x < 0 || x >= pW || y < 0 || y >= pH) || value == (0xffff00ff).toInt()){
+    private fun setPixel(x: Int, y: Int, value: Int){
+        if((x < 0 || x >= pW || y < 0 || y >= pH) || ((value shr 24 and 0xff) == 0)){
             return
         }
 
@@ -172,8 +172,8 @@ class Renderer(gc: GameContainer) {
 
 
 
-        for (y in newX until newHeight){
-            for (x in newX until newWidth) {
+        for (y in newY until newHeight +1){
+            for (x in newX until newWidth +1) {
                 setPixel(x+ offX, y + offY, color)
             }
         }
