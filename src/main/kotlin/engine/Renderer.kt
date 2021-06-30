@@ -6,26 +6,23 @@ import engine.gfx.ImageTile
 
 import java.awt.image.DataBufferInt
 
-class Renderer {
+class Renderer(gc: GameContainer) {
 
     private var pW: Int = 0
     private var pH: Int = 0
-    private lateinit var p: IntArray
+    private var p: IntArray
     private var font = Font.STANDARD
 
 
-    fun Renderer(gc: GameContainer){
-
+    init{
         pW = gc.width
         pH = gc.height
         p = (gc.window.image!!.raster.dataBuffer as DataBufferInt).data
-
-
     }
 
     fun clear(){
-        for (i in p!!.indices){
-            p!![i] =0
+        for (i in p.indices){
+            p[i] =0
         }
     }
 

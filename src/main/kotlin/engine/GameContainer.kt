@@ -32,8 +32,8 @@ class GameContainer : Runnable {
         window = Window()
         window.Window(this)
 
-        renderer = Renderer()
-        renderer.Renderer(this)
+        renderer = Renderer(this)
+
 
         input = Input()
         input.Input(this)
