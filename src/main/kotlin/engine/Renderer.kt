@@ -12,24 +12,44 @@ class Renderer(gc: GameContainer) {
     private var pH: Int = 0
     private var p: IntArray
     private var font = Font.STANDARD
+    private var zBuffer: IntArray
+    private var zDepth = 0
 
 
     init{
         pW = gc.width
         pH = gc.height
         p = (gc.window.image!!.raster.dataBuffer as DataBufferInt).data
+        zBuffer = IntArray(p.size)
     }
 
     fun clear(){
         for (i in p.indices){
             p[i] =0
+            zBuffer[i] = 0
         }
     }
 
     private fun setPixel(x: Int, y: Int, value: Int){
-        if((x < 0 || x >= pW || y < 0 || y >= pH) || ((value shr 24 and 0xff) == 0)){
+
+        var alpha = (value shr 24 and 0xff)
+
+
+        if((x < 0 || x >= pW || y < 0 || y >= pH) || alpha == 0){
             return
         }
+
+        if (zBuffer[x + y * pW] > zDepth){
+            return
+        }
+
+        if(alpha == 255){
+            p[x + y * pW] = value
+        }
+        //TODO: Here
+
+
+
 
         p[x + y * pW] = value
     }
