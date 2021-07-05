@@ -11,7 +11,8 @@ import java.awt.event.KeyEvent
 
 class GameManager: AbstractGame() {
 
-    private var image: ImageTile = ImageTile("/test.png", 16, 16)
+    private var image: Image = Image("/test.png")
+    private var image2: Image = Image("/test2.png")
     private var clip: SoundClip = SoundClip("/sounds/sound.wav")
 
 
@@ -39,7 +40,8 @@ class GameManager: AbstractGame() {
 
     override fun render(gc: GameContainer, r: Renderer) {
 
-        r.drawImage(image, gc.input.mouseX, gc.input.mouseY)
+        r.drawImage(image,10 ,10)
+        r.drawImage(image2, gc.input.mouseX, gc.input.mouseY)
 
        // r.drawFilledRect(gc.input.mouseX -16, gc.input.mouseY -16, 32, 32, (0xffffccff).toInt())
     }

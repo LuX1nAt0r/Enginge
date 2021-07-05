@@ -46,12 +46,21 @@ class Renderer(gc: GameContainer) {
         if(alpha == 255){
             p[x + y * pW] = value
         }
-        //TODO: Here
+        else{
+            var pixelColor= p[x+ y* pW]
+
+            var newRed = ((pixelColor shr 16) and 0xff) - ((((pixelColor shr 16) and 0xff) - ((value shr 16) and 0xff)) * (alpha / 255))
+            var newGreen = ((pixelColor shr 8) and 0xff) - ((((pixelColor shr 8) and 0xff) - ((value shr 8) and 0xff)) * (alpha / 255))
+            var newBlue = (pixelColor and 0xff) - (((pixelColor and 0xff) - (value and 0xff)) * (alpha / 255))
+//TODO: There is a bug
+            p[x +y *pW] = ((255 shl 24) and (newRed shl 16) and (newGreen shl 8) and newBlue)
+        }
 
 
 
 
-        p[x + y * pW] = value
+        //p[x + y * pW] = value
+
     }
 
     fun drawText(text: String, offX: Int, offY: Int, color:Int){

@@ -62,7 +62,7 @@ class GameContainer : Runnable {
 
         while (running) {
 
-            render = false
+            render = true
 
             firstTime = System.nanoTime() / 1000000000.0
             passedTime = firstTime - lastTime
