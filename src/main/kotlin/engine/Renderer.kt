@@ -32,8 +32,8 @@ class Renderer(gc: GameContainer) {
 
     private fun setPixel(x: Int, y: Int, value: Int){
 
-        var alpha = value shr 24 and 0xff
-        println(alpha)
+        val alpha = value shr 24 and 0xff
+
 
 
 
@@ -49,14 +49,28 @@ class Renderer(gc: GameContainer) {
             p[x + y * pW] = value
         }
         else{
-            var pixelColor= p[x+ y* pW]
+            val pixelColor= p[x+ y* pW]
 
-            var newRed = ((pixelColor shr 16 and 0xff) - (((pixelColor shr 16 and 0xff) - (value shr 16 and 0xff)) * (alpha / 255)))
-            var newGreen = ((pixelColor shr 8 and 0xff) - (((pixelColor shr 8 and 0xff) - (value shr 8 and 0xff)) * (alpha / 255)))
-            var newBlue = ((pixelColor and 0xff) - (((pixelColor and 0xff) - (value and 0xff)) * (alpha / 255)))
-//TODO:
-            p[x +y *pW] = 255 shl 24 and newRed shl 16 and newGreen shl 8 and newBlue
+            val tempAlpha = (alpha.toFloat() / 255.0).toFloat()
+            val oneMinusAlpha = 1.0 - tempAlpha
+
+            val oldR = pixelColor shr 16 and 0xff
+            val oldG = pixelColor shr 8 and 0xff
+            val oldB = pixelColor and 0xff
+
+            val tempR = value shr 16 and 0xff
+            val tempG = value shr 8 and 0xff
+            val tempB = value and 0xff
+
+            val newR = ((tempR * tempAlpha) + (oneMinusAlpha * oldR)).toInt()
+            val newG = ((tempG * tempAlpha) + (oneMinusAlpha * oldG)).toInt()
+            val newB = ((tempB * tempAlpha) + (oneMinusAlpha * oldB)).toInt()
+
+            p[x +y *pW] = (255 shl 24) or (newR shl 16) or (newG shl 8) or (newB shl 0)
+
         }
+
+
 
 
 
