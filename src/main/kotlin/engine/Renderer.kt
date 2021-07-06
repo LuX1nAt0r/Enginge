@@ -51,8 +51,8 @@ class Renderer(gc: GameContainer) {
         else{
             val pixelColor= p[x+ y* pW]
 
-            val tempAlpha = (alpha.toFloat() / 255.0).toFloat()
-            val oneMinusAlpha = 1.0 - tempAlpha
+            val tempAlpha: Float = (alpha.toFloat() / 255f)
+            val oneMinusAlpha = 1f - tempAlpha
 
             val oldR = pixelColor shr 16 and 0xff
             val oldG = pixelColor shr 8 and 0xff
@@ -69,13 +69,6 @@ class Renderer(gc: GameContainer) {
             p[x +y *pW] = (255 shl 24) or (newR shl 16) or (newG shl 8) or (newB shl 0)
 
         }
-
-
-
-
-
-
-        //p[x + y * pW] = value
 
     }
 
