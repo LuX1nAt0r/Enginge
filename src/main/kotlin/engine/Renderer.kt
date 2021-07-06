@@ -32,7 +32,9 @@ class Renderer(gc: GameContainer) {
 
     private fun setPixel(x: Int, y: Int, value: Int){
 
-        var alpha = (value shr 24 and 0xff)
+        var alpha = value shr 24 and 0xff
+        println(alpha)
+
 
 
         if((x < 0 || x >= pW || y < 0 || y >= pH) || alpha == 0){
@@ -43,9 +45,9 @@ class Renderer(gc: GameContainer) {
             return
         }
 
-       /* if(alpha == 255){
+        if(alpha == 255){
             p[x + y * pW] = value
-        }*/
+        }
         else{
             var pixelColor= p[x+ y* pW]
 
@@ -53,7 +55,7 @@ class Renderer(gc: GameContainer) {
             var newGreen = ((pixelColor shr 8 and 0xff) - (((pixelColor shr 8 and 0xff) - (value shr 8 and 0xff)) * (alpha / 255)))
             var newBlue = ((pixelColor and 0xff) - (((pixelColor and 0xff) - (value and 0xff)) * (alpha / 255)))
 //TODO:
-            p[x +y *pW] = 255 shl 24 or newRed shl 16 or newGreen shl 8 or newBlue
+            p[x +y *pW] = 255 shl 24 and newRed shl 16 and newGreen shl 8 and newBlue
         }
 
 
