@@ -2,18 +2,25 @@ package engine
 
 import engine.gfx.Font
 import engine.gfx.Image
+import engine.gfx.ImageRequest
 import engine.gfx.ImageTile
 
 import java.awt.image.DataBufferInt
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Renderer(gc: GameContainer) {
+
+    private var font = Font.STANDARD
+    private var imageRequest: ArrayList<ImageRequest> = ArrayList<ImageRequest>()
 
     private var pW: Int = 0
     private var pH: Int = 0
     private var p: IntArray
-    private var font = Font.STANDARD
+
     private var zBuffer: IntArray
     private var zDepth = 0
+    private var processing = false
 
 
     init{
@@ -21,6 +28,7 @@ class Renderer(gc: GameContainer) {
         pH = gc.height
         p = (gc.window.image!!.raster.dataBuffer as DataBufferInt).data
         zBuffer = IntArray(p.size)
+
     }
 
     fun clear(){
@@ -29,6 +37,24 @@ class Renderer(gc: GameContainer) {
             zBuffer[i] = 0
         }
     }
+
+    fun process(){
+        processing = true
+
+
+
+        for (i in 0 until imageRequest.size){
+            var ir: ImageRequest = imageRequest[i]
+            zDepth = ir.zDepth
+            ir.image.alpha = false
+            drawImage(ir.image, ir.offX, ir.offY)
+        }
+
+        imageRequest.clear()
+        processing = false
+    }
+
+
 
     private fun setPixel(x: Int, y: Int, value: Int){
 
@@ -41,15 +67,19 @@ class Renderer(gc: GameContainer) {
             return
         }
 
-        if (zBuffer[x + y * pW] > zDepth){
+        var index = x + y * pW
+
+        if (zBuffer[index] > zDepth){
             return
         }
 
+        zBuffer[index] = zDepth
+
         if(alpha == 255){
-            p[x + y * pW] = value
+            p[index] = value
         }
         else{
-            val pixelColor= p[x+ y* pW]
+            val pixelColor= p[index]
 
             val tempAlpha: Float = (alpha.toFloat() / 255f)
             val oneMinusAlpha = 1f - tempAlpha
@@ -66,7 +96,7 @@ class Renderer(gc: GameContainer) {
             val newG = ((tempG * tempAlpha) + (oneMinusAlpha * oldG)).toInt()
             val newB = ((tempB * tempAlpha) + (oneMinusAlpha * oldB)).toInt()
 
-            p[x +y *pW] = (255 shl 24) or (newR shl 16) or (newG shl 8) or (newB shl 0)
+            p[index] = (255 shl 24) or (newR shl 16) or (newG shl 8) or (newB shl 0)
 
         }
 
@@ -98,6 +128,11 @@ class Renderer(gc: GameContainer) {
 
 
     fun drawImage(image: Image, offX: Int, offY: Int){
+
+        if (image.alpha && !processing){
+            imageRequest.add(ImageRequest(image, zDepth, offX, offY))
+            return
+        }
 
         //Don't Render code
         if(offX < -image.width) return

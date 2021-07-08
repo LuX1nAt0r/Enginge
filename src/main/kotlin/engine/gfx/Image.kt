@@ -13,6 +13,7 @@ open class Image(path: String) {
     var height: Int = 0
     lateinit var p: IntArray
     lateinit var image: BufferedImage
+    var alpha = false
 
     init{
         try {

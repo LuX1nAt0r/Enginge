@@ -18,6 +18,7 @@ class GameManager: AbstractGame() {
 
     init {
         clip.setVolume(-20f)
+        image2.alpha = true
     }
 
     override fun update(gc: GameContainer, dt: Float) {
@@ -40,8 +41,9 @@ class GameManager: AbstractGame() {
 
     override fun render(gc: GameContainer, r: Renderer) {
 
-        r.drawImage(image,10 ,10)
         r.drawImage(image2, gc.input.mouseX, gc.input.mouseY)
+        r.drawImage(image,10 ,10)
+
 
        // r.drawFilledRect(gc.input.mouseX -16, gc.input.mouseY -16, 32, 32, (0xffffccff).toInt())
     }
